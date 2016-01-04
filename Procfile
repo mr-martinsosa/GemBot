@@ -1,1 +1,1 @@
-worker: ruby ./ausumbot.rb
+worker: ruby ./gembot.rb
