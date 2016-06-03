@@ -1,1 +1,1 @@
-worker: ruby ./gembot.rb
+worker: ruby ./mythrilbot.rb
