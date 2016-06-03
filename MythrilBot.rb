@@ -4,7 +4,7 @@ require 'discordrb'
 #bot = Discordrb::Bot.new ENV["BOT_LOGIN"], ENV["BOT_PASS"]
 bot = Discordrb::Commands::CommandBot.new token: ENV["BOT_ID"], application_id: ENV[BOT_APP], prefix: '!'
 
-list of commands
+#list of commands
 bot.command :commands do |event|
     event.respond "Hello! Here are all the commands I have!"
     event.respond "!ping: Pong it back!"
