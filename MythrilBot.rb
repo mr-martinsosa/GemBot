@@ -55,8 +55,11 @@ bot.command :whois do |event, arg|
 end
 
 bot.command :about do |event|
-    event.respond "Creator: <@95557857449091072>\n Library: DiscordRB\n Uptime: #{Uptime.uptime}\n"
-    return nil
+    event << 'Author: Martin (<@95557857449091072>).'
+    event << "Owner: <@#{CONFIG.owner_id}>."
+    event << 'Discord: Under Construction.'
+    event << 'Website: Under Construction.'
+    event << 'Github: <https://goo.gl/6AXKpt>'
 end 
 
 bot.command :urban do |event, *args|
