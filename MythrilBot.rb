@@ -1,6 +1,7 @@
 require 'discordrb'
 require 'sys/uptime'
-
+require 'json'
+require 'open-uri'
 
 #create bot, store login credentials in an environmental variable for security
 #bot = Discordrb::Bot.new ENV["BOT_LOGIN"], ENV["BOT_PASS"]
@@ -18,7 +19,7 @@ end
 
 #___________________________COMMANDS LIST______________________________________
 bot.command :ping do |event|
-    event.respond "Pong!"
+    event.respond "Pong! That took: #{Time.now - event.timestamp} nanoseconds."
 end
 
 bot.command :pong do |event|
@@ -57,6 +58,30 @@ bot.command :about do |event|
     event.respond "Creator: <@95557857449091072>\n Library: DiscordRB\n Uptime: #{Uptime.uptime}\n"
     return nil
 end 
+
+bot.command :urban do |event, *args|
+    args = args.join(' ')
+    
+    def get_uri(uri)
+        data = open(uri).read
+    end
+    
+    def parse(data)
+        define = JSON.parse(data)
+    end
+    
+    def ud_uri(args)
+        "http://api.urbandictionary.com/v0/define?term=#{args}"
+    end
+    
+    begin
+        event << "**Top result for: **\n"
+        event << "**#{args.split.map(&:capitalize).join(' ')} **\n"
+        event << parse(get_uri(ud_uri(args)))['list'].first['definition']
+    rescue
+        event << "Error: Invalid Search."
+    end
+end   
 
 bot.message(with_text: "!8ball") do |event|
     event.respond ["As I see it, yes", "It is certain", "It is decidedly so", "Most likely", "Outlook good", "Signs point to yes", "Without a doubt", "Yes", "Yes – definitely", "You may rely on it", "Reply hazy, try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"].sample

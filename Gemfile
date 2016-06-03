@@ -4,3 +4,7 @@ source 'https://rubygems.org'
 gem 'discordrb'
 #To track the uptime
 gem 'sys-uptime'
+#To parse words and searches and such
+gem 'json'
+#To parse the api's json
+gem 'open-uri'
