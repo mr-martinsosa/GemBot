@@ -1,4 +1,6 @@
 require 'discordrb'
+require 'sys/uptime'
+
 
 #create bot, store login credentials in an environmental variable for security
 #bot = Discordrb::Bot.new ENV["BOT_LOGIN"], ENV["BOT_PASS"]
@@ -50,6 +52,11 @@ bot.command :whois do |event, arg|
         event.respond "Playing: #{user1.game}"
     end
 end
+
+bot.command :about do |event|
+    event.respond "Creator: <@95557857449091072>\n Library: DiscordRB\n Uptime: #{Uptime.uptime}\n"
+    return nil
+end 
 
 bot.message(with_text: "!8ball") do |event|
     event.respond ["As I see it, yes", "It is certain", "It is decidedly so", "Most likely", "Outlook good", "Signs point to yes", "Without a doubt", "Yes", "Yes – definitely", "You may rely on it", "Reply hazy, try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"].sample
