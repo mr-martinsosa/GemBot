@@ -7,16 +7,6 @@ require 'open-uri'
 #bot = Discordrb::Bot.new ENV["BOT_LOGIN"], ENV["BOT_PASS"]
 bot = Discordrb::Commands::CommandBot.new token: ENV["BOT_ID"], application_id: ENV[BOT_APP], prefix: '!'
 
-#list of commands
-bot.command :commands do |event|
-    event.respond "Hello! Here are all the commands I have!"
-    event.respond "!ping: Pong it back!"
-    event.respond "!pong: You meant ping, right?"
-    event.respond "!hi: Hi there!"
-    event.respond "!flip: Flips a coin, heads or tails?"
-    event.respond "!8ball: Ask a question, see the outcome!"
-end
-
 #___________________________COMMANDS LIST______________________________________
 bot.command :ping do |event|
     event.respond "Pong! That took: #{Time.now - event.timestamp} nanoseconds."
@@ -32,7 +22,7 @@ end
 
 bot.command :flip do |event|
     coin = ["heads!", "tails!"].sample
-    event.respond "#{event.user.mention} flips a coin... and it lands on #{coin}!"
+    event.respond "#{event.user.mention} flips a coin... and it lands on #{coin}"
 end
 
 bot.command :roll do |event|
@@ -42,16 +32,19 @@ end
 bot.command :whois do |event, arg|
     user1 = bot.parse_mention(arg)
     event.respond "User Name: #{user1.name}\n"
-    event.respond "#{user1.status}\n"
-    event.respond "User ID: #{user1.id}\n"
+    event.respond "Status: #{user1.status}\n"
+    event.respond "User ID: < #{user1.id} >\n"
     
     if user1.voice_channel != nil
-        event.respond "Currently in: #{user1.voice_channel.name}"
+        event << "Currently in: #{user1.voice_channel}"
     end
-    
+        event << "Not in a voice channel."
+        
     if user1.game != nil
-        event.respond "Playing: #{user1.game}"
+        event << "Playing: #{user1.game}."
     end
+        event << "Not playing a game."
+    
 end
 
 bot.command :about do |event|
