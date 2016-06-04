@@ -56,7 +56,6 @@ end
 
 bot.command :about do |event|
     event << 'Author: Martin (<@95557857449091072>).'
-    event << "Owner: <@#{CONFIG.owner_id}>."
     event << 'Discord: Under Construction.'
     event << 'Website: Under Construction.'
     event << 'Github: <https://goo.gl/6AXKpt>'
