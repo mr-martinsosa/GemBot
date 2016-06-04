@@ -50,6 +50,7 @@ PLATFORMS
 
 DEPENDENCIES
   discordrb
+  json
   sys-uptime
 
 BUNDLED WITH
